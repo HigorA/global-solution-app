@@ -8,7 +8,9 @@ export default function HomeScreen() {
                 Home Screen
             </Text>
             <Image
-            source={require('')}
+                source={require('./../../../assets/mae.png')}
+                resizeMode="cover"
+                style={{width: 200, height: 200, alignSelf: 'center'}}
             />
         </SafeAreaView>
     )
@@ -16,6 +18,6 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
     conteinerSafe:{
-        backgroundColor: '#F78881'
+        backgroundColor: '#FFCAB3'
     }
 })
