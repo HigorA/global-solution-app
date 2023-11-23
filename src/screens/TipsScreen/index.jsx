@@ -8,21 +8,21 @@ export default function TipsScreen() {
                  <Image
                  source={require('./../../../assets/menuoptionsicon.png')}
                  resizeMode="cover"
-                 style={{ width: 100, height: 100, alignItems: 'center'}}
+                 style={{ width: 90, height: 90, alignItems: 'center'}}
                 />
               </View>
               <View>
                  <Image
                  source={require('./../../../assets/logo.png')}
                  resizeMode="cover"
-                 style={{ width: 100, height: 100, alignItems: 'left'}}
+                 style={{ width: 90, height: 90, alignItems: 'left'}}
                 />
               </View>
               <View>
                  <Image
                  source={require('./../../../assets/engineconfigicon.png')}
                  resizeMode="cover"
-                 style={{ width: 100, height: 100, alignItems: 'right'}}
+                 style={{ width: 90, height: 90, alignItems: 'right'}}
                  />
                </View>
             </View>
