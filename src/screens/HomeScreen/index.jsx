@@ -39,6 +39,6 @@ const styles = StyleSheet.create({
     borderRadius: 20, 
     overflow: 'hidden', 
     alignSelf: 'center',
-    marginTop: 250 
+    marginTop: 200 
   },
 });
