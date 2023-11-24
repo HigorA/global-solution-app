@@ -1,17 +1,10 @@
-import { Dimensions, Image, Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { horizontalScale } from "../../Metrics";
 import { MaterialCommunityIcons, Ionicons, Fontisto } from '@expo/vector-icons';
-import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../../redux/actions";
 
 export default function MenuScreen({navigation}) {
-    const dispatch = useDispatch();
-    const user = useSelector(state.user);
 
-    function handleLogout() {
-        dispatch(logoutUser());
-    }
-
+    
     return(
         <SafeAreaView style={style.container}>
             <View style={style.circleBackground} />
@@ -30,11 +23,12 @@ export default function MenuScreen({navigation}) {
                     </View>
                 </Pressable>
                 
-                
-                <View style={style.buttonContainer}>
-                    <MaterialCommunityIcons name="file-document-edit-outline" size={48} color="#2288BB" />
-                    <Text style={style.buttonTitleContainer}>Exames</Text>
-                </View>
+                <Pressable onPress={() => console.log("")}>
+                    <View style={style.buttonContainer}>
+                        <MaterialCommunityIcons name="file-document-edit-outline" size={48} color="#2288BB" />
+                        <Text style={style.buttonTitleContainer}>Exames</Text>
+                    </View>
+                </Pressable>
 
                 <View style={style.buttonContainer}>
                     <MaterialCommunityIcons name="chat-question-outline" size={48} color="#2288BB" />
