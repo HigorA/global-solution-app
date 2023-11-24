@@ -2,11 +2,17 @@ import { Dimensions, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Tex
 import { horizontalScale, verticalScale } from "../../Metrics";
 import { useState } from "react";
 import DatePicker from "react-native-date-picker";
+import { UserRegister } from './../../api/UserApi.js'
 
-export default function RegisterScreen() {
-    const [date, setDate] = useState(new Date())
+export default function RegisterScreen({navigation}) {
     const [open, setOpen] = useState(false)
+    
     const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [gender, setGender] = useState("");
+    const [date, setDate] = useState(new Date())
 
     const isValidEmail = (email) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -21,6 +27,19 @@ export default function RegisterScreen() {
         Alert.alert('E-mail inválido', 'O e-mail inserido não é válido.');
     }
     };
+
+    const handleRegister = (email, password, firstName, lastName, gender, date) => {
+        const data = {
+            "email": email,
+            "password": password,
+            "firstName": firstName,
+            "lastName": lastName,
+            "gender": gender,
+            "birthdayDate": date,
+            "role": "ADMIN"
+        }
+        UserRegister(data);
+    }
 
     return(
         <SafeAreaView style={style.container}>
@@ -72,11 +91,11 @@ export default function RegisterScreen() {
 
                 <Pressable onPress={() =>{
                     console.log(date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate())
+                    navigation.navigate();
                 }} style={style.loginButton}>
                     <Text style={style.loginButtonText}>Cadastrar-se</Text>
                 </Pressable>
-            </View>
-            
+            </View> 
         </SafeAreaView>
     )
 }

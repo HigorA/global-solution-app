@@ -3,6 +3,7 @@ import { horizontalScale, verticalScale } from "../../Metrics";
 import { useState } from "react";
 import Toast from 'react-native-toast-message';
 import { StatusBar } from "react-native";
+import { UserLogin } from './../../api/UserApi.js'
 
 export default function LoginScreen({navigation}) {
 
@@ -17,7 +18,7 @@ export default function LoginScreen({navigation}) {
     
     const handleValidation = (inputEmail) => {
     if (isValidEmail(inputEmail)) {
-        Alert.alert('E-mail válido', 'O e-mail inserido é válido.');
+        // Alert.alert('E-mail válido', 'O e-mail inserido é válido.');
         return true;
     } else {
         // Alert.alert('E-mail inválido', 'O e-mail inserido não é válido.');
@@ -25,18 +26,33 @@ export default function LoginScreen({navigation}) {
     }
     };
 
-    const showToast = () => {
+    const showToast = (message) => {
         Toast.show({
-            type: 'success',
-            text1: "Hello",
-            text2: "Test"
+            type: 'error',
+            text1: message,
         });
     }
 
     const handleLogin = (email, password) => {
-        if (handleValidation(email) == false) {
-            showToast();
+        if (!email || !password) {
+            showToast("Email e senha são obrigatórios.");
             return;
+        }
+    
+        if (!handleValidation(email)) {
+            showToast("Email inválido.");
+            return;
+        }
+
+        let retorno = UserLogin(email, password);
+        if (retorno) {
+            console.log(retorno.token)
+            showToast(message="Login.");
+            navigation.navigate('Menu');
+        } else {
+            setEmail("");
+            setPassword("");
+            showToast(message="Não foi possivel realizar login."); 
         }
     }
 
@@ -51,14 +67,14 @@ export default function LoginScreen({navigation}) {
                 <Text style={style.loginContainerTitle}>Bem-vinda!</Text>
                 <View style={style.inputContainer}>
                     <Text>E-mail</Text>
-                    <TextInput onChangeText={setEmail} style={style.loginInput}/>
+                    <TextInput onChangeText={setEmail} value={email} style={style.loginInput}/>
                 </View>
                 <View style={style.inputContainer}>
                     <Text>Senha</Text>
-                    <TextInput secureTextEntry={true} style={style.loginInput}/>
+                    <TextInput onChangeText={setPassword} value={password} secureTextEntry={true} style={style.loginInput}/>
                 </View>
                 <Text style={style.registerButton} onPress={() => navigation.navigate("Register")}>Cadastre-se</Text>
-                <Pressable onPress={() => showToast()} style={style.loginButton}>
+                <Pressable onPress={() => handleLogin(email, password)} style={style.loginButton}>
                     <Text style={style.loginButtonText}>Login</Text>
                 </Pressable>
             </View>
