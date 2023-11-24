@@ -1,10 +1,13 @@
 import { Pressable, SafeAreaView, StyleSheet, Text, TextInput, View, Dimensions, Image, Alert } from "react-native";
 import { horizontalScale, verticalScale } from "../../Metrics";
 import { useState } from "react";
+import Toast from 'react-native-toast-message';
+import { StatusBar } from "react-native";
 
 export default function LoginScreen({navigation}) {
 
     const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     const isValidEmail = (email) => {
         // Expressão regular para validar um e-mail
@@ -15,14 +18,33 @@ export default function LoginScreen({navigation}) {
     const handleValidation = (inputEmail) => {
     if (isValidEmail(inputEmail)) {
         Alert.alert('E-mail válido', 'O e-mail inserido é válido.');
+        return true;
     } else {
-        console.log(inputEmail)
-        Alert.alert('E-mail inválido', 'O e-mail inserido não é válido.');
+        // Alert.alert('E-mail inválido', 'O e-mail inserido não é válido.');
+        return false;
     }
     };
 
+    const showToast = () => {
+        Toast.show({
+            type: 'success',
+            text1: "Hello",
+            text2: "Test"
+        });
+    }
+
+    const handleLogin = (email, password) => {
+        if (handleValidation(email) == false) {
+            showToast();
+            return;
+        }
+    }
+
+    
+
     return(
         <SafeAreaView style={style.container}>
+            <StatusBar hidden={true}/>
             <View style={style.circleBackground} />
             <Image source={require('./../../../assets/logo.png')} style={style.logo} resizeMode="contain"/>
             <View style={style.loginContainer}>
@@ -36,7 +58,7 @@ export default function LoginScreen({navigation}) {
                     <TextInput secureTextEntry={true} style={style.loginInput}/>
                 </View>
                 <Text style={style.registerButton} onPress={() => navigation.navigate("Register")}>Cadastre-se</Text>
-                <Pressable onPress={() => handleValidation(email)} style={style.loginButton}>
+                <Pressable onPress={() => showToast()} style={style.loginButton}>
                     <Text style={style.loginButtonText}>Login</Text>
                 </Pressable>
             </View>

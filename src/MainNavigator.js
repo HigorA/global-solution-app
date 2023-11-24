@@ -13,7 +13,7 @@ export default function MainNavigator() {
     const Stack = createNativeStackNavigator();
 
     return(
-        <Stack.Navigator initialRouteName="Family" screenOptions={{headerShown: false}}>
+        <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown: false}}>
             <Stack.Screen name="Home" component={HomeScreen} /> 
             <Stack.Screen name="Login" component={LoginScreen} /> 
             <Stack.Screen name="Register" component={RegisterScreen} /> 
