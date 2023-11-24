@@ -1,13 +1,14 @@
-import { SafeAreaView, Text, StyleSheet, Image, Button, View } from 'react-native';
+import { SafeAreaView, Text, StyleSheet, Image, Button, View, Pressable } from 'react-native';
+import { horizontalScale } from '../../Metrics';
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
   return (
     <SafeAreaView style={styles.containerSafe}>
 
 
       <Image
         source={require('./../../../assets/logo.png')}
-        resizeMode="cover"
+        resizeMode="contain"
         style={{ width: 200, height: 200, alignSelf: 'center', marginBottom: 250 }}
       />
 
@@ -18,13 +19,9 @@ export default function HomeScreen() {
       />
     
         
-      <View style={styles.buttonContainer}>
-        <Button
-          title="Entrar"
-          color="#f58581"
-          onPress={() => {}}
-        />
-      </View>
+      <Pressable style={styles.loginButton} onPress={() => navigation.navigate("Login")}>
+        <Text style={styles.loginButtonText}>Entrar</Text>
+      </Pressable>
     </SafeAreaView>
   );
 }
@@ -33,12 +30,21 @@ const styles = StyleSheet.create({
   containerSafe: {
     backgroundColor: '#FFCAB3',
     flex: 1, 
+    alignItems: 'center'
   },
-  buttonContainer: {
-    width: '80%', 
-    borderRadius: 20, 
-    overflow: 'hidden', 
-    alignSelf: 'center',
-    marginTop: 200 
+
+  loginButton: {
+    width: horizontalScale(300),
+    backgroundColor: '#F58581',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 10,
+    borderRadius: 16
   },
+
+  loginButtonText: {
+    fontSize: 20,
+    color: '#fff',
+    fontWeight: '500'
+  }
 });
