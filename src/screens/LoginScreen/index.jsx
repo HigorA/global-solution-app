@@ -106,15 +106,15 @@ const style = StyleSheet.create({
       },
     
     loginButtonText: {
-    fontSize: 20,
-    color: '#fff',
-    fontWeight: '500'
+        fontSize: 20,
+        color: '#fff',
+        fontWeight: '500'
     },
 
     inputContainer: {
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    gap: 8
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        gap: 8
     },
 
     registerButton: {
