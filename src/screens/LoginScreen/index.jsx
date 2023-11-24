@@ -4,8 +4,12 @@ import { useState } from "react";
 import Toast from 'react-native-toast-message';
 import { StatusBar } from "react-native";
 import { UserLogin } from './../../api/UserApi.js'
+import { useDispatch } from "react-redux";
+import { setUser } from './../../redux/actions'
 
 export default function LoginScreen({navigation}) {
+
+    const dispatch = useDispatch();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -48,6 +52,7 @@ export default function LoginScreen({navigation}) {
         if (retorno) {
             console.log(retorno.token)
             showToast(message="Login.");
+            dispatch(setUser({id: retorno}))
             navigation.navigate('Menu');
         } else {
             setEmail("");
